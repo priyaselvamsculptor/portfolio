@@ -1,4 +1,4 @@
-# Elena Vasquez - Clay Sculptor & Portrait Artist Portfolio
+# Priya Selvam - Clay Sculptor & Portrait Artist Portfolio
 
 ## Concept & Vision
 
