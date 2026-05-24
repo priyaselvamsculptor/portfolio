@@ -1038,7 +1038,7 @@ footer p {
 .interactive-canvas-container {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4;
   background: radial-gradient(circle at center, #352a1c 0%, #171109 100%);
   border-radius: 2px;
   overflow: hidden;
@@ -1190,7 +1190,6 @@ footer p {
     margin: 0 auto;
     gap: 2rem;
   }
-
 
   nav {
     padding: 1rem 1.5rem;

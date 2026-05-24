@@ -149,7 +149,7 @@ class ModelViewer {
         const size = box.getSize(new THREE.Vector3());
 
         const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 1.05 / maxDim; // fits standard size
+        const scale = 1.2 / maxDim; // fits standard size
         this.model.scale.set(scale, scale, scale);
 
         box.setFromObject(this.model);
