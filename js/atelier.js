@@ -51,8 +51,10 @@ class ModelViewer {
 
     this.container.appendChild(this.renderer.domElement);
 
-    // 4. Create OrbitControls
+    // 4. Create OrbitControls (disabled by default to prevent scroll hijacking)
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.enabled = false;
+    this.renderer.domElement.style.touchAction = 'auto'; // allow page scroll over canvas
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.05;
     this.controls.minDistance = 1.5;
@@ -176,19 +178,37 @@ class ModelViewer {
   }
 
   setupListeners() {
-    // Detect user interactions to disable auto-rotation
-    const stopAutoRotate = () => {
-      if (this.autoRotate) {
+    // Click on canvas container to activate interactive mode
+    this.container.addEventListener('click', (e) => {
+      e.stopPropagation();
+      
+      if (!this.controls.enabled) {
+        this.controls.enabled = true;
         this.autoRotate = false;
-        // Fade out hint badge
+        this.container.classList.add('interactive-active');
+        this.renderer.domElement.style.touchAction = 'none'; // Lock scroll, enable 3D drag
+        
+        // Hide hint badge
         if (this.hintElement) {
           this.hintElement.classList.add('hidden');
         }
       }
-    };
+    });
 
-    this.container.addEventListener('pointerdown', stopAutoRotate);
-    this.container.addEventListener('wheel', stopAutoRotate, { passive: true });
+    // Click outside to deactivate interactive mode
+    document.addEventListener('pointerdown', (e) => {
+      if (this.controls.enabled && !this.container.contains(e.target)) {
+        this.controls.enabled = false;
+        this.autoRotate = true;
+        this.container.classList.remove('interactive-active');
+        this.renderer.domElement.style.touchAction = 'auto'; // Unlock scroll
+        
+        // Show hint badge again
+        if (this.hintElement) {
+          this.hintElement.classList.remove('hidden');
+        }
+      }
+    });
 
     // Window Resize
     window.addEventListener('resize', () => {

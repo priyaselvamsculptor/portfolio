@@ -7,6 +7,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img, canvas, .interactive-canvas-container {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 :root {
@@ -1042,10 +1049,15 @@ footer p {
   background: radial-gradient(circle at center, #352a1c 0%, #171109 100%);
   border-radius: 2px;
   overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.interactive-canvas-container.interactive-active {
   cursor: grab;
 }
 
-.interactive-canvas-container:active {
+.interactive-canvas-container.interactive-active:active {
   cursor: grabbing;
 }
 
